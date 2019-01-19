@@ -7,7 +7,10 @@ services:
             target: dev
         image: symfony-app:dev
         container_name: symfony-app
+        depends_on:
+            - db
         environment:
+            - DATABASE_URL=${DATABASE_URL}
             - APP_ENV=${APP_ENV}
         volumes:
             - .:/app:cached
@@ -15,6 +18,18 @@ services:
             - ./var/log/app:/app/var/log:rw,delegated
             - ./var/log/debug:/var/log/xdebug:rw,delegated
             - ./var/report/phpunit:/var/report/phpunit:rw,delegated
+    db:
+        image: mariadb:10.4
+        container_name: symfony-db
+        environment:
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        ports:
+            - 3306:3306
+        volumes:
+            - symfony-db-data:/var/lib/mysql:rw
     web:
         build:
             context: .
@@ -29,3 +44,5 @@ services:
         volumes:
             - ./public:/app/public:ro,cached
             - ./var/log/web:/var/log/nginx:rw,delegated
+volumes:
+    symfony-db-data: {}

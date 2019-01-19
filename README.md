@@ -4,7 +4,7 @@ It is based on `Docker` and `Docker Compose`.
 
 ## Changelog
 ### 1.0.0
-TODO
+Implemented a very basic setup of php-fpm, nginx & mariadb.  
 
 ## Development
 1. Install [Docker for Desktop](https://www.docker.com/products/docker-desktop) on your development machine.

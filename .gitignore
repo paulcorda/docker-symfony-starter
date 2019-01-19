@@ -2,12 +2,7 @@
 /docker-compose.override.yml
 
 # IDE
-/.idea/**/dataSources/
-/.idea/**/dataSources.local.xml
-/.idea/**/workspace.xml
-/.idea/**/tasks.xml
-/.idea/dictionaries
-*.iml
+/.idea
 
 # OS
 .DS_Store

@@ -1,7 +1,11 @@
 version: '3.7'
 services:
     app:
-        image: php:7.2-fpm-alpine
+        build:
+            context: .
+            dockerfile: ./docker/app/Dockerfile
+            target: dev
+        image: symfony-app:dev
         container_name: symfony-app
         environment:
             - APP_ENV=${APP_ENV}
@@ -10,6 +14,7 @@ services:
             - ./var/cache:/app/var/cache:rw,delegated
             - ./var/log/app:/app/var/log:rw,delegated
             - ./var/log/debug:/var/log/xdebug:rw,delegated
+            - ./var/report/phpunit:/var/report/phpunit:rw,delegated
     web:
         build:
             context: .

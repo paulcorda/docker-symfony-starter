@@ -11,7 +11,10 @@ services:
             - ./var/log/app:/app/var/log:rw,delegated
             - ./var/log/debug:/var/log/xdebug:rw,delegated
     web:
-        image: nginx:1.15-alpine
+        build:
+            context: .
+            dockerfile: ./docker/web/Dockerfile
+        image: symfony-web:dev
         container_name: symfony-web
         depends_on:
             - app
